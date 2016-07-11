@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0">
+      <display-name>simulator</display-name>
+ <!--  <servlet>
+    <servlet-name>Jersey REST Service</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>dingwen.simulator.controller;
+        dingwen.simulator.filter;
+        dingwen.simulator.utilities;
+org.glassfish.jersey.jackson.JacksonFeature
+        </param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey REST Service</servlet-name>
+    <url-pattern>/jersey/*</url-pattern>
+  </servlet-mapping> -->
+  <filter>
+        <filter-name>dingwen.simulator.jersey.filter</filter-name>
+        <filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>dingwen.simulator.App.Application</param-value>
+        </init-param>
+        <!-- exclude static resource -->
+        <init-param>
+            <param-name>jersey.config.servlet.filter.staticContentRegex</param-name>
+            <param-value>/.*(jsp|css|js|html)</param-value> <!-- /(image|css)/.* -->
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>dingwen.simulator.jersey.filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
